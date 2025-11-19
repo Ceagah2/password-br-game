@@ -1,5 +1,5 @@
 export type ValidationResult = {
-  ok: boolean;
+  valid: boolean;
   message?: string; 
 };
 

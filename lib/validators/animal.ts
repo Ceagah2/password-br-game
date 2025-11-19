@@ -1,26 +1,38 @@
+import { normalize } from "./normalize";
 import { Validator } from "./types";
 
-export const brazilianAnimalValidator: Validator = (password) => {
-  const ANIMALS = [
-    "capivara",
-    "tamanduá",
-    "onça",
-    "arara",
-    "jabuti",
-    "paca",
-    "boto",
-  ];
+const ANIMALS = [
+  "capivara",
+  "tamandua",
+  "onca",
+  "arara",
+  "jabuti",
+  "paca",
+  "boto",
+  "mico",
+  "tamandua",
+  "tatu",
+  "jutai",
+  "sucuri",
+  "sabiá",
+  "galo",
+  "ema",
+  "mico",
+  "tartaruga",
+  "garoupa",
+  "lobo",
+  "beija-flor",
+  "garca",
+  "arara",
+];
 
-  const found = ANIMALS.some((animal) =>
-    password.toLowerCase().includes(animal.toLowerCase())
-  );
-
-  if (!found) {
-    return {
-      ok: false,
-      message: "Inclua um animal brasileiro na sua senha.",
-    };
-  }
-
-  return { ok: true };
+export const animal: Validator = (input) => {
+  const n = normalize(input);
+  const found = ANIMALS.some((a) => n.includes(a));
+  return found
+    ? { valid: true }
+    : {
+        valid: false,
+        message: "Pode ser aqueles que tem na nota.",
+      };
 };

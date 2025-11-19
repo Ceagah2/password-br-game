@@ -1,28 +1,28 @@
+import { normalize } from "./normalize";
 import { Validator } from "./types";
 
-export const emotionValidator: Validator = (password) => {
-  const EMOTIONS = [
-    "felicidade",
-     "tristeza",
-      "raiva", 
-      "medo",
-      "nojo",
-      "surpresa",
-      "tedio",
-      "ansiedade",
-      "alegria",
-      ];
+const EMOTIONS = [
+  "feliz",
+  "triste",
+  "raiva",
+  "medo",
+  "nojo",
+  "surpreso",
+  "alegre",
+  "ansioso",
+  "calmo",
+  "melancolico",
+  "satisfeito",
+  "entediado",
+];
 
-  const found = EMOTIONS.some((emotion) =>
-    password.toLowerCase().includes(emotion.toLowerCase())
-  );
-
-  if (!found) {
-    return {
-      ok: false,
-      message: "Sua senha precisa expressar uma emoção básica humana.",
-    };
-  }
-
-  return { ok: true };
+export const emotion: Validator = (input) => {
+  const n = normalize(input);
+  const found = EMOTIONS.some((e) => n.includes(e));
+  return found
+    ? { valid: true }
+    : {
+        valid: false,
+        message: "Coloque uma emoção (ex: feliz, triste, surpreso).",
+      };
 };
